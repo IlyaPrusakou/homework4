@@ -83,14 +83,27 @@ namespace Basic.Lesson_4._1
         //B4-P13/25 For_LettersCount
         public static void B4_P13_25_For_LettersCount()
         {
-            
+            Console.WriteLine("input your word");
+            string s = Console.ReadLine();
+            int score = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+               score = s[i] == 'a' || s[i] == 'A' ? ++score:score;
+            }
+            Console.WriteLine(score);
         }
 
 
         //B4-P14/25 *For_AlphabetBack
         public static void B4_P14_25_For_AlphabetBack()
         {
-            
+            char result;
+            int rest = 64;
+            for (int i = 1; i < 27; i++)
+            {
+                result = (char)(rest + i);
+                Console.WriteLine(Convert.ToString(result).ToUpper() + "  " + Convert.ToString(result).ToLower());
+            }
         }
 
 
@@ -117,8 +130,20 @@ namespace Basic.Lesson_4._1
         //B4-P18/25 While_Multiplier
         public static void B4_P18_25_While_Multiplier()
         {
-            
+            Console.WriteLine("Input the base number");
+            int x = Convert.ToInt32(Console.ReadLine()); 
+            Console.WriteLine("Input the power number");
+            int i = Convert.ToInt32(Console.ReadLine());
+            int score = 1;
+            int result = x;
+            while (score < i)
+            {
+                result *= x;
+                score++;
+            }
+            Console.WriteLine("Answer   " + result);
         }
+
 
 
         //B4-P19/25 While_SolveNumberAdding
@@ -138,13 +163,96 @@ namespace Basic.Lesson_4._1
         //B4-P21/25 *While_DiceGameMultiplePlayers
         public static void dB4_P21_25_While_DiceGameMultiplePlayers()
         {
+            bool playerFlag = true;
+            int truePlayerscore = 0;
+            int falsePlayerscore = 0;
+            Random rnd = new Random();
+            while (truePlayerscore < 25 && falsePlayerscore < 25)
+            {
+                while (playerFlag)
+                {
+                    Console.WriteLine("Input 1 for Player 1 uses bones");
+                    string answerPlayer1 = Console.ReadLine();
+                    if (answerPlayer1 == "1")
+                    {
+                        int player1Step = rnd.Next(7);
+                        Console.WriteLine("Bones have shown " + player1Step);
+                        truePlayerscore += player1Step;
+                        Console.WriteLine($"Player 1 score is {truePlayerscore}");
+                        playerFlag = !playerFlag;
+                    }
+                }
+                while (!playerFlag)
+                {
+                    Console.WriteLine("Input 2 for Player 2 uses bones");
+                    string answerPlayer2 = Console.ReadLine();
+                    if (answerPlayer2 == "2")
+                    {
+                        int player2Step = rnd.Next(7);
+                        Console.WriteLine("Bones have shown " + player2Step);
+                        falsePlayerscore += player2Step;
+                        Console.WriteLine($"Player 2 score is {falsePlayerscore}");
+                        playerFlag = !playerFlag;
+                    }
+                }
+            }
+            if (truePlayerscore >= 25)
+            {
+                Console.WriteLine("Player 1 win");
+            }
+            else if (falsePlayerscore >= 25)
+            {
+                Console.WriteLine("Player 2 win");
+            }
         }
 
 
         //B4-P22_25 *While_Akinator100Numbers
         public static void B4_P22_25_While_Akinator100Numbers()
         {
-            
+            List<int> arrayList = new List<int>();
+            for (int i = 1; i < 101; i++)
+            {
+                arrayList.Add(i);
+            }
+            int leftBorder = 1;
+            int rightBorder = arrayList.Count;
+            while (!(leftBorder >= rightBorder))
+            {
+                int midValue = leftBorder + (rightBorder - leftBorder) / 2;
+                Console.WriteLine($"Is your number equal {midValue} or less. If equal --- input e, if not equal --- input y/n");
+                string answer = Console.ReadLine();
+                if (answer == "y")
+                {
+                    rightBorder = midValue;
+                }
+                else if (answer == "n")
+                {
+                    leftBorder = midValue + 1;
+                }
+                else if (answer == "e")
+                {
+                    Console.WriteLine($"Your number is {midValue}");
+                    break;
+                }
+                if ((rightBorder - leftBorder) <= 1)
+                {
+                    Console.WriteLine("Your number is  " + (leftBorder) + "Y?");
+                    answer = Console.ReadLine();
+                    if (answer == "y")
+                    {
+                        Console.WriteLine("the number have been solved");
+                        break;
+                    }
+                    else if (answer == "n")
+                    {
+                        Console.WriteLine("Your number is  " + (rightBorder) );
+                        break;
+                    } 
+                    
+                }
+            }
+
         }
 
 
@@ -165,6 +273,19 @@ namespace Basic.Lesson_4._1
         //B4-P25/25 Cycle_WordRevercse
         public static void B4_P25_25_Cycle_WordRevercse()
         {
+            List<char> s = new List<char>();
+            Console.WriteLine("input your word");
+            string input = Console.ReadLine();
+            foreach (char value in input)
+            {
+                s.Add(value);
+            }
+            
+            for (int i = s.Count-1; i > -1; i--)
+            {
+                Console.Write(s[i]);
+            }
+            
         }
     }
 }
